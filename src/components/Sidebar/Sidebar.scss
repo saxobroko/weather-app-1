@@ -1,0 +1,57 @@
+.weather-app__sidebar {
+  background-image: 'assets/Cloud-background.png';
+  background: #1e213a;
+  height: 100%;
+}
+
+.weather-app__sidebar__container {
+  padding: 2.5rem 3rem;
+}
+
+.weather-app__sidebar__top-section {
+  display: flex;
+  margin-bottom: 6.875rem;
+}
+
+.weather-app__sidebar__search-location {
+  font-weight: 500;
+  padding: 0.75rem 1.75rem;
+  background: #6e707a;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.weather-app__sidebar__current-location {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  background: #6e707a;
+  font-size: 22px;
+  padding: 0.5rem;
+  border-radius: 50%;
+}
+
+.weather-app__sidebar__icon {
+  display: block;
+  margin-bottom: 5.5rem;
+}
+
+.weather-app__sidebar__temperature {
+  font-weight: 500;
+  font-size: 9rem;
+  margin: 0;
+  padding: 0;
+  & svg {
+    font-size: 3rem;
+    color: #6e707a;
+  }
+}
+
+.weather-app__sidebar__condition {
+}
+
+.weather-app__sidebar__date {
+}
+
+.weather-app__sidebar__location {
+}

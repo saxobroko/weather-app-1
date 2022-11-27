@@ -1,4 +1,4 @@
-import { weatherApi } from '../helpers';
+import { weatherApi } from 'helpers';
 const apiKey = process.env.REACT_APP_API_KEY;
 
 const getByCurrentLocation = async (lat, lon) => {

@@ -1,9 +1,13 @@
 import React from 'react';
 
-import { weatherService } from './services';
-import { useEffectOnce } from './hooks';
-
-import './App.css';
+import { weatherService } from 'services';
+import { useEffectOnce } from 'hooks';
+import {
+  Sidebar,
+  ScaleSelector,
+  WeekForecast,
+  TodayHighlights
+} from 'components';
 
 import { useQuery } from '@tanstack/react-query';
 
@@ -25,7 +29,16 @@ function App() {
   });
 
   if (isLoading) return <div>loading</div>;
-  return <div className="App">Weather App</div>;
+  return (
+    <main className="weather-app">
+      <Sidebar />
+      <section className="weather-app__information">
+        <ScaleSelector  />
+        <WeekForecast />
+        <TodayHighlights />
+      </section>
+    </main>
+  );
 }
 
 export default App;
