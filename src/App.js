@@ -1,22 +1,31 @@
 import React from 'react';
-import './App.css';
-import { weatherApi } from './helpers';
 
-const apiKey = process.env.REACT_APP_API_KEY;
+import { weatherService } from './services';
+import { useEffectOnce } from './hooks';
+
+import './App.css';
+
+import { useQuery } from '@tanstack/react-query';
 
 function App() {
-  React.useEffect(() => {
-    const getWeather = async () => {
-      const forecast = await weatherApi.get(
-        `weather?appid=${apiKey}&q=asuncion`
-      );
-      console.log(forecast);
-    };
+  const [geolocation, setGeolocation] = React.useState({ lat: 0, lon: 0 });
+  const { isLoading, error, data } = useQuery(
+    ['currentForecast'],
+    () => weatherService.getByCurrentLocation(geolocation.lat, geolocation.lon),
+    { enabled: !geolocation.lat && !geolocation.lon }
+  );
 
-    getWeather();
-  }, []);
+  useEffectOnce(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { longitude, latitude } = position.coords;
+        setGeolocation({ lat: latitude, lon: longitude });
+      });
+    }
+  });
 
-  return <div className="App"></div>;
+  if (isLoading) return <div>loading</div>;
+  return <div className="App">Weather App</div>;
 }
 
 export default App;
