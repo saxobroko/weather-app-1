@@ -15,8 +15,13 @@ function App() {
   const [geolocation, setGeolocation] = React.useState({ lat: 0, lon: 0 });
   const { isLoading, error, data } = useQuery(
     ['currentForecast'],
-    () => weatherService.getByCurrentLocation(geolocation.lat, geolocation.lon),
-    { enabled: !geolocation.lat && !geolocation.lon }
+    () =>
+      weatherService.getByCurrentLocation(
+        geolocation.lat,
+        geolocation.lon,
+        'metric'
+      ),
+    { enabled: geolocation.lat !== 0 }
   );
 
   useEffectOnce(() => {
@@ -31,10 +36,15 @@ function App() {
   if (isLoading) return <div>loading</div>;
   return (
     <main className="weather-app">
-      <Sidebar />
+      <Sidebar
+        temperature={data.main.temp}
+        location={data.name}
+        icon={data.weather[0].icon}
+        condition={data.weather[0].main}
+      />
       <section className="weather-app__information">
-        <ScaleSelector  />
-        <WeekForecast />
+        <ScaleSelector />
+        <WeekForecast geolocation={geolocation} />
         <TodayHighlights />
       </section>
     </main>

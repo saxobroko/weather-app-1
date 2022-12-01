@@ -1,19 +1,35 @@
 .weather-app__sidebar {
-  background-image: 'assets/Cloud-background.png';
   background: #1e213a;
   height: 100%;
+  position: relative;
+  width: 30%;
+}
+
+.weather-app__sidebar::before {
+  content: '';
+  background-image: url(../../assets/Cloud-background.png);
+  background-repeat: no-repeat;
+  background-position: 50% 25%;
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
 }
 
 .weather-app__sidebar__container {
   padding: 2.5rem 3rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .weather-app__sidebar__top-section {
   display: flex;
+  justify-content: space-between;
   margin-bottom: 6.875rem;
 }
 
 .weather-app__sidebar__search-location {
+  font-size: 1.25rem;
   font-weight: 500;
   padding: 0.75rem 1.75rem;
   background: #6e707a;
@@ -24,16 +40,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: fit-content;
   background: #6e707a;
-  font-size: 22px;
+  aspect-ratio: 1/1;
+  font-size: 28px;
   padding: 0.5rem;
-  border-radius: 50%;
+  border-radius: 100%;
 }
 
 .weather-app__sidebar__icon {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 5.5rem;
+
+  & img {
+    width: 200px;
+    height: 200px;
+  }
 }
 
 .weather-app__sidebar__temperature {
@@ -41,6 +64,9 @@
   font-size: 9rem;
   margin: 0;
   padding: 0;
+  text-align: center;
+  margin-bottom: 5.5rem;
+
   & svg {
     font-size: 3rem;
     color: #6e707a;
@@ -48,10 +74,51 @@
 }
 
 .weather-app__sidebar__condition {
+  font-size: 2.25rem;
+  font-weight: 600;
+  text-align: center;
+  color: #a09fb1;
+  margin-bottom: 5.5rem;
 }
 
 .weather-app__sidebar__date {
+  display: flex;
+  color: #6e707a;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+
+  & > span {
+    display: block;
+  }
+
+  & > span:nth-child(2) {
+    padding: 0 1rem;
+  }
 }
 
 .weather-app__sidebar__location {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6e707a;
+  & > svg {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .weather-app__sidebar {
+    width: 100%;
+  }
+
+  .weather-app__sidebar__container {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .weather-app__sidebar__icon {
+    margin-bottom: 4.75rem;
+  }
+  .weather-app__sidebar__location {
+    margin-bottom: 6.5rem;
+  }
 }
