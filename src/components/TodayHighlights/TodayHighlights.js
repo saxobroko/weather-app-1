@@ -4,12 +4,12 @@ import './TodayHighlights.scss';
 export const TodayHighlights = () => {
   return (
     <section className="weather-app__todays-highlights">
+      <h2>Today's Highlights</h2>
       <div className="weather-app__todays-highlights__container">
-        <h2>Today's Highlights</h2>
         <div className="weather-app__todays-highlights__wind-status">
           <h3>Wind Status</h3>
           <span className="weather-app__todays-highlights__wind-status__speed">
-            7mph
+            7<span>mph</span>
           </span>
           <span className="weather-app__todays-highlights__wind-status__direction">
             WSW
@@ -18,7 +18,7 @@ export const TodayHighlights = () => {
         <div className="weather-app__todays-highlights__humidity">
           <h3>Humidity</h3>
           <span className="weather-app__todays-highlights__humidity__percentage">
-            84%
+            84 <span>%</span>
           </span>
           <div className="weather-app__todays-highlights__humidity__percentage-bar">
             percentage bar
