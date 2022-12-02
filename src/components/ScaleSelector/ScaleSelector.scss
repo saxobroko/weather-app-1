@@ -1,2 +1,28 @@
 .weather-app__scale-selector {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4.125rem;
+}
+.weather-app__scale-selector__container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.weather-app__scale-selector__option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #585676;
+  padding: 0.75rem;
+  border-radius: 100%;
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 15px;
+  cursor: pointer;
+}
+
+.weather-app__scale-selector__option--active {
+  background: #e7e7eb;
+  color: #110e3c;
 }

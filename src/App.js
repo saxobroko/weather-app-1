@@ -13,13 +13,15 @@ import { useQuery } from '@tanstack/react-query';
 
 function App() {
   const [geolocation, setGeolocation] = React.useState({ lat: 0, lon: 0 });
+  const [scaleType, setScaleType] = React.useState('metric');
+
   const { isLoading, error, data } = useQuery(
     ['currentForecast'],
     () =>
       weatherService.getByCurrentLocation(
         geolocation.lat,
         geolocation.lon,
-        'metric'
+        scaleType
       ),
     { enabled: geolocation.lat !== 0 }
   );
@@ -41,10 +43,11 @@ function App() {
         location={data.name}
         icon={data.weather[0].icon}
         condition={data.weather[0].main}
+        scaleType={scaleType}
       />
       <section className="weather-app__information">
-        <ScaleSelector />
-        <WeekForecast geolocation={geolocation} />
+        <ScaleSelector scaleType={scaleType} setScaleType={setScaleType} />
+        <WeekForecast geolocation={geolocation} scaleType={scaleType} />
         <TodayHighlights />
       </section>
     </main>

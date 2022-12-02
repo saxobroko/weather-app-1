@@ -1,12 +1,18 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { BiCurrentLocation } from 'react-icons/bi';
-import { RiCelsiusFill } from 'react-icons/ri';
+import { RiCelsiusFill, RiFahrenheitFill } from 'react-icons/ri';
 import { MdLocationPin } from 'react-icons/md';
 
 import './Sidebar.scss';
 
-export const Sidebar = ({ temperature, location, icon, condition }) => {
+export const Sidebar = ({
+  temperature,
+  location,
+  icon,
+  condition,
+  scaleType
+}) => {
   const roundedTemperature = Math.round(temperature);
 
   let today = format(new Date(), 'EEE, d MMM');
@@ -30,7 +36,7 @@ export const Sidebar = ({ temperature, location, icon, condition }) => {
         </div>
         <h2 className="weather-app__sidebar__temperature">
           {roundedTemperature}
-          <RiCelsiusFill />
+          {scaleType === 'metric' ? <RiCelsiusFill /> : <RiFahrenheitFill />}
         </h2>
         <h3 className="weather-app__sidebar__condition">{condition}</h3>
 

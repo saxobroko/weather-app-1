@@ -7,14 +7,16 @@ import { weatherService } from 'services';
 
 import './WeekForecast.scss';
 
-export const WeekForecast = ({ geolocation }) => {
+export const WeekForecast = ({ geolocation, scaleType }) => {
   const { isLoading, error, data } = useQuery(['fiveDaysForecast'], () =>
     weatherService.getFiveDaysWeather(
       geolocation.lat,
       geolocation.lon,
-      'metric'
+      scaleType
     )
   );
+
+  const scaleSymbol = scaleType === 'metric' ? '°C' : '°F';
 
   if (isLoading) return <div>loading</div>;
   return (
@@ -25,7 +27,7 @@ export const WeekForecast = ({ geolocation }) => {
           const date = i === 0 ? 'Tomorrow' : formattedDate;
 
           return (
-            <div className="weather-app__week-forecast__day-info">
+            <div className="weather-app__week-forecast__day-info" key={dt}>
               <span className="weather-app__week-forecast__day-info__day">
                 {date}
               </span>
@@ -36,8 +38,14 @@ export const WeekForecast = ({ geolocation }) => {
                 />
               </div>
               <div className="weather-app__week-forecast__day-info__temperature">
-                <span>{Math.round(temp.min)}°C</span>
-                <span>{Math.round(temp.max)}°C</span>
+                <span>
+                  {Math.round(temp.min)}
+                  {scaleSymbol}
+                </span>
+                <span>
+                  {Math.round(temp.max)}
+                  {scaleSymbol}
+                </span>
               </div>
             </div>
           );
