@@ -1,0 +1,37 @@
+.weather-app__week-forecast {
+  margin-bottom: 4.5rem;
+}
+
+.weather-app__week-forecast__container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.weather-app__week-forecast__day-info {
+  background: #1e213a;
+  padding: 1.125rem;
+  text-align: center;
+}
+
+.weather-app__week-forecast__day-info__day {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.weather-app__week-forecast__day-info__icon {
+  margin-bottom: 2rem;
+}
+
+.weather-app__week-forecast__day-info__temperature {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  padding: 0 1rem;
+
+  & > span:first-child {
+    color: #e7e7eb;
+  }
+  & > span:last-child {
+    color: #a09fb1;
+  }
+}

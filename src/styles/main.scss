@@ -11,9 +11,11 @@
 }
 
 .weather-app__information {
+  width: 70%;
+  margin: 0 auto;
+  max-width: 728px;
   display: flex;
   flex-direction: column;
-  width: 70%;
 }
 
 @media (max-width: 768px) {

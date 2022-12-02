@@ -18,15 +18,31 @@ export const WeekForecast = ({ geolocation }) => {
 
   if (isLoading) return <div>loading</div>;
   return (
-    <div>
-      {data.map((props, index) => {
-        const date =
-          index === 0
-            ? 'Tomorrow'
-            : format(fromUnixTime(props.dt), 'EEE, d MMM');
+    <section className="weather-app__week-forecast">
+      <div className="weather-app__week-forecast__container">
+        {data.map(({ dt, temp, weather }, i) => {
+          const formattedDate = format(fromUnixTime(dt), 'EEE, d MMM');
+          const date = i === 0 ? 'Tomorrow' : formattedDate;
 
-        return <div>{date}</div>;
-      })}
-    </div>
+          return (
+            <div className="weather-app__week-forecast__day-info">
+              <span className="weather-app__week-forecast__day-info__day">
+                {date}
+              </span>
+              <div className="weather-app__week-forecast__day-info__icon">
+                <img
+                  src={`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
+                  alt="weather-conditions"
+                />
+              </div>
+              <div className="weather-app__week-forecast__day-info__temperature">
+                <span>{Math.round(temp.min)}°C</span>
+                <span>{Math.round(temp.max)}°C</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
   );
 };
