@@ -49,13 +49,55 @@
 }
 
 .weather-app__todays-highlights__humidity__percentage {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+
+  & > span {
+    font-size: 2.25rem;
+    font-weight: 400;
+  }
 }
 
 .weather-app__todays-highlights__humidity__percentage-bar {
+  width: 185px;
 }
 
-.weather-app__todays-highlights__visibility__amount {
+.weather-app__todays-highlights__humidity__percentage-bar__top-numbers {
+  display: flex;
+  justify-content: space-between;
+  color: #a09fb1;
+  font-size: 0.75rem;
 }
 
+.weather-app__todays-highlights__humidity__percentage-bar__bar {
+  height: 8px;
+  width: 100%;
+  background: #e7e7eb;
+  border-radius: 80px;
+  overflow: hidden;
+  margin-bottom: 0.25rem;
+}
+
+.weather-app__todays-highlights__humidity__percentage-bar__bar__fill {
+  width: 0;
+  height: 100%;
+  background: #ffec65;
+}
+
+.weather-app__todays-highlights__humidity__percentage-bar__percentage-symbol {
+  color: #a09fb1;
+  font-size: 0.75rem;
+  float: right;
+}
+
+.weather-app__todays-highlights__visibility__amount,
 .weather-app__todays-highlights__air-pressure__level {
+  font-size: 4rem;
+  font-weight: 700;
+
+  & > span {
+    font-weight: 400;
+    font-size: 2.25rem;
+  }
 }

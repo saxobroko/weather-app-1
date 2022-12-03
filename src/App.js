@@ -35,6 +35,8 @@ function App() {
     }
   });
 
+  console.log(data);
+
   if (isLoading) return <div>loading</div>;
   return (
     <main className="weather-app">
@@ -48,7 +50,12 @@ function App() {
       <section className="weather-app__information">
         <ScaleSelector scaleType={scaleType} setScaleType={setScaleType} />
         <WeekForecast geolocation={geolocation} scaleType={scaleType} />
-        <TodayHighlights />
+        <TodayHighlights
+          wind={data.wind}
+          pressure={data.main.pressure}
+          humidity={data.main.humidity}
+          visibility={data.visibility}
+        />
       </section>
     </main>
   );
