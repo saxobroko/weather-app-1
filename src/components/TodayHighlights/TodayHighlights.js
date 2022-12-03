@@ -1,10 +1,10 @@
 import React from 'react';
+import { FaLocationArrow } from 'react-icons/fa';
+
 import './TodayHighlights.scss';
 import { getDirection, convertKmToMiles } from 'helpers';
 
 export const TodayHighlights = ({ wind, pressure, humidity, visibility }) => {
-  console.log(humidity);
-
   return (
     <section className="weather-app__todays-highlights">
       <h2>Today's Highlights</h2>
@@ -15,9 +15,14 @@ export const TodayHighlights = ({ wind, pressure, humidity, visibility }) => {
             {Math.round(wind.speed)}
             <span>mph</span>
           </span>
-          <span className="weather-app__todays-highlights__wind-status__direction">
-            {getDirection(wind.deg)}
-          </span>
+          <div className="weather-app__todays-highlights__wind-status__direction">
+            <span>
+              <FaLocationArrow
+                style={{ transform: `rotate(${wind.deg}deg)` }}
+              />
+            </span>
+            <span>{getDirection(wind.deg)}</span>
+          </div>
         </div>
         <div className="weather-app__todays-highlights__humidity">
           <h3>Humidity</h3>
