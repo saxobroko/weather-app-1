@@ -8,12 +8,14 @@ import { weatherService } from 'services';
 import './WeekForecast.scss';
 
 export const WeekForecast = ({ geolocation, scaleType }) => {
-  const { isLoading, error, data } = useQuery(['fiveDaysForecast'], () =>
-    weatherService.getFiveDaysWeather(
-      geolocation.lat,
-      geolocation.lon,
-      scaleType
-    )
+  const { isLoading, error, data } = useQuery(
+    ['fiveDaysForecast', scaleType],
+    () =>
+      weatherService.getFiveDaysWeather(
+        geolocation.lat,
+        geolocation.lon,
+        scaleType
+      )
   );
 
   const scaleSymbol = scaleType === 'metric' ? '°C' : '°F';

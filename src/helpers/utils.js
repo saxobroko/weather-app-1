@@ -33,6 +33,10 @@ export function getDirection(angle) {
   return directions[section];
 }
 
-export function convertKmToMiles(km) {
+export function kmmToMiles(km) {
   return km * 0.000621371;
+}
+
+export function metersToKm(meters) {
+  return meters / 1000;
 }

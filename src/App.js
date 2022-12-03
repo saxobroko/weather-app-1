@@ -16,7 +16,7 @@ function App() {
   const [scaleType, setScaleType] = React.useState('metric');
 
   const { isLoading, error, data } = useQuery(
-    ['currentForecast'],
+    ['currentForecast', scaleType],
     () =>
       weatherService.getByCurrentLocation(
         geolocation.lat,
@@ -27,15 +27,11 @@ function App() {
   );
 
   useEffectOnce(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { longitude, latitude } = position.coords;
-        setGeolocation({ lat: latitude, lon: longitude });
-      });
-    }
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { longitude, latitude } = position.coords;
+      setGeolocation({ lat: latitude, lon: longitude });
+    });
   });
-
-  console.log(data);
 
   if (isLoading) return <div>loading</div>;
   return (
@@ -51,6 +47,7 @@ function App() {
         <ScaleSelector scaleType={scaleType} setScaleType={setScaleType} />
         <WeekForecast geolocation={geolocation} scaleType={scaleType} />
         <TodayHighlights
+          scaleType={scaleType}
           wind={data.wind}
           pressure={data.main.pressure}
           humidity={data.main.humidity}

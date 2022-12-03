@@ -5,6 +5,7 @@ import { RiCelsiusFill, RiFahrenheitFill } from 'react-icons/ri';
 import { MdLocationPin } from 'react-icons/md';
 
 import './Sidebar.scss';
+import { Search } from 'components/Search/Search';
 
 export const Sidebar = ({
   temperature,
@@ -50,6 +51,7 @@ export const Sidebar = ({
           <MdLocationPin />
           {location}
         </span>
+        <Search />
       </div>
     </section>
   );

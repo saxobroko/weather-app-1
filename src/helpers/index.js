@@ -1,2 +1,2 @@
 export { weatherApi } from './axios';
-export { getDirection, convertKmToMiles } from './utils';
+export { getDirection, kmmToMiles, metersToKm } from './utils';

@@ -3,6 +3,9 @@ import React from 'react';
 export const useEffectOnce = (callback, deps) => {
   const hasRunOnce = React.useRef(false);
   React.useEffect(() => {
+    if (hasRunOnce.current) {
+      return;
+    }
     if (!hasRunOnce.current) {
       callback();
       hasRunOnce.current = true;

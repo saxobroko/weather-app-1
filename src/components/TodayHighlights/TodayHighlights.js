@@ -2,9 +2,25 @@ import React from 'react';
 import { FaLocationArrow } from 'react-icons/fa';
 
 import './TodayHighlights.scss';
-import { getDirection, convertKmToMiles } from 'helpers';
+import { getDirection, kmmToMiles, metersToKm } from 'helpers';
 
-export const TodayHighlights = ({ wind, pressure, humidity, visibility }) => {
+export const TodayHighlights = ({
+  scaleType,
+  wind,
+  pressure,
+  humidity,
+  visibility
+}) => {
+  const isMetric = scaleType === 'metric';
+
+  const currentVisibility = isMetric
+    ? metersToKm(visibility)
+    : kmmToMiles(visibility);
+
+  const kphOrMph = isMetric ? 'kph' : 'mph';
+
+  const milesOrKm = isMetric ? 'km' : 'mi';
+
   return (
     <section className="weather-app__todays-highlights">
       <h2>Today's Highlights</h2>
@@ -13,7 +29,7 @@ export const TodayHighlights = ({ wind, pressure, humidity, visibility }) => {
           <h3>Wind Status</h3>
           <span className="weather-app__todays-highlights__wind-status__speed">
             {Math.round(wind.speed)}
-            <span>mph</span>
+            <span>{kphOrMph}</span>
           </span>
           <div className="weather-app__todays-highlights__wind-status__direction">
             <span>
@@ -50,7 +66,7 @@ export const TodayHighlights = ({ wind, pressure, humidity, visibility }) => {
         <div className="weather-app__todays-highlights__visibility">
           <h3>Visibility</h3>
           <span className="weather-app__todays-highlights__visibility__amount">
-            {convertKmToMiles(visibility).toFixed(1)} <span>miles</span>
+            {currentVisibility.toFixed(1)} <span>{milesOrKm}</span>
           </span>
         </div>
         <div className="weather-app__todays-highlights__air-pressure">
