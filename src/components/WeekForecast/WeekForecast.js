@@ -1,5 +1,4 @@
 import React from 'react';
-import Skeleton from 'react-loading-skeleton';
 import { useQuery } from '@tanstack/react-query';
 import fromUnixTime from 'date-fns/fromUnixTime';
 import { format } from 'date-fns';
@@ -9,7 +8,7 @@ import { weatherService } from 'services';
 import './WeekForecast.scss';
 
 export const WeekForecast = ({ geolocation, scaleType }) => {
-  const { isLoading, data } = useQuery(['fiveDaysForecast', scaleType], () =>
+  const { data } = useQuery(['fiveDaysForecast', scaleType], () =>
     weatherService.getFiveDaysWeather(
       geolocation.lat,
       geolocation.lon,
@@ -19,7 +18,6 @@ export const WeekForecast = ({ geolocation, scaleType }) => {
 
   const scaleSymbol = scaleType === 'metric' ? '°C' : '°F';
 
-  if (isLoading) return <Skeleton />;
   return (
     <section className="weather-app__week-forecast">
       <div className="weather-app__week-forecast__container">
@@ -32,20 +30,18 @@ export const WeekForecast = ({ geolocation, scaleType }) => {
                 {date}
               </span>
               <div className="weather-app__week-forecast__day-info__icon">
-                {(
-                  <img
-                    src={`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
-                    alt="weather-conditions"
-                  />
-                ) || <Skeleton />}
+                <img
+                  src={`http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
+                  alt="weather-conditions"
+                />
               </div>
               <div className="weather-app__week-forecast__day-info__temperature">
                 <span>
-                  {Math.round(temp.min) || <Skeleton />}
+                  {Math.round(temp.min)}
                   {scaleSymbol}
                 </span>
                 <span>
-                  {Math.round(temp.max) || <Skeleton />}
+                  {Math.round(temp.max)}
                   {scaleSymbol}
                 </span>
               </div>
