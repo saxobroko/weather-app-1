@@ -5,12 +5,15 @@ export const weatherApi = axios.create({
   baseURL: `https://api.openweathermap.org/data/2.5/`
 });
 
+const apiKey = process.env.REACT_APP_LOCATION_API_KEY;
+const apiHost = process.env.REACT_APP_HOST;
+
 export const locationApi = rateLimit(
   axios.create({
     baseURL: 'https://referential.p.rapidapi.com/',
     headers: {
-      'X-RapidAPI-Key': 'f4e9ba908bmshca4c47221752125p113141jsnfffba6208f9e',
-      'X-RapidAPI-Host': 'referential.p.rapidapi.com'
+      'X-RapidAPI-Key': apiKey,
+      'X-RapidAPI-Host': apiHost
     }
   }),
   { maxRequests: 1, perMilliseconds: 2000, maxRPS: 1 }

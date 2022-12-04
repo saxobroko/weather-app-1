@@ -32,8 +32,6 @@ function App() {
     { enabled: Boolean(location.length) || geolocation.lat !== 0 }
   );
 
-  console.log(data);
-
   useEffectOnce(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
