@@ -35,3 +35,24 @@
     color: #a09fb1;
   }
 }
+
+@media (max-width: 1024px) {
+  .weather-app__week-forecast__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .weather-app__week-forecast__day-info__temperature {
+    justify-content: center;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 425px) {
+  .weather-app__week-forecast__container {
+    gap: 1rem;
+    max-width: 328px;
+    margin: 0 auto;
+  }
+}

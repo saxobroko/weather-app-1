@@ -112,3 +112,18 @@
     font-size: 2.25rem;
   }
 }
+
+@media (max-width: 1024px) {
+  .weather-app__todays-highlights__container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 425px) {
+  .weather-app__todays-highlights__container {
+    max-width: 328px;
+  }
+}

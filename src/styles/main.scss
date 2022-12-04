@@ -18,9 +18,22 @@
   flex-direction: column;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .weather-app {
     display: flex;
     flex-direction: column;
+  }
+
+  .weather-app__information {
+    width: 100%;
+    margin: 3.25rem auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 375px) {
+  .weather-app__information {
+    max-width: 328px;
   }
 }
