@@ -1,0 +1,117 @@
+.weather-app__sidebar__search-bar {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #1e213a;
+  padding: 1.25rem 3rem;
+  transition: transform 300ms ease-out;
+  transform: translate(-1000px);
+  z-index: 10;
+}
+
+.weather-app__sidebar__search-bar__top {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.weather-app__sidebar__search-bar__close-btn {
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+  width: 28.5px;
+  height: 28.5px;
+  position: relative;
+}
+
+.weather-app__sidebar__search-bar__close-btn::before,
+.weather-app__sidebar__search-bar__close-btn::after {
+  content: '';
+  position: absolute;
+  width: 28.5px;
+  height: 4px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(255, 101, 47, 0.2);
+  transition: all 0.5s ease-in-out;
+  top: 50%;
+  left: 0;
+}
+
+.weather-app__sidebar__search-bar__close-btn::before {
+  transform: rotate(45deg);
+}
+.weather-app__sidebar__search-bar__close-btn::after {
+  transform: rotate(-45deg);
+}
+
+.weather-app__sidebar__search-bar__middle {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3.625rem;
+}
+
+.weather-app__sidebar__search-bar__input {
+  border: 1px solid #e7e7eb;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-right: 0.75rem;
+  & svg {
+    height: 18px;
+    width: 18px;
+    margin-right: 1rem;
+    fill: #616475;
+  }
+
+  & > input {
+    background: none;
+    color: #e7e7eb;
+    outline: none;
+    border: none;
+    width: 100%;
+    &::placeholder {
+      font-weight: 500;
+    }
+  }
+}
+
+.weather-app__sidebar__search-bar__btn {
+  padding: 1rem 0.85rem;
+  font-weight: 600;
+  color: #e7e7eb;
+  background: #3c47e9;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background: #454eca;
+  }
+}
+
+.weather-app__sidebar__search-bar__results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.weather-app__sidebar__search-bar__results-item {
+  padding: 1rem 1.5rem;
+  position: relative;
+  margin-bottom: 1rem;
+
+  &:hover {
+    border: 1px solid #616475;
+    cursor: pointer;
+  }
+}
+
+.weather-app__sidebar__search-bar__results-item:after {
+  content: '>';
+  font-weight: 500;
+  position: absolute;
+  color: #616475;
+  right: 5%;
+}

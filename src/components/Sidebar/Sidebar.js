@@ -14,6 +14,8 @@ export const Sidebar = ({
   condition,
   scaleType
 }) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
   const roundedTemperature = Math.round(temperature);
 
   let today = format(new Date(), 'EEE, d MMM');
@@ -22,7 +24,10 @@ export const Sidebar = ({
     <section className="weather-app__sidebar">
       <div className="weather-app__sidebar__container">
         <div className="weather-app__sidebar__top-section">
-          <div className="weather-app__sidebar__search-location">
+          <div
+            className="weather-app__sidebar__search-location"
+            onClick={() => setIsOpen(true)}
+          >
             Search for places
           </div>
           <div className="weather-app__sidebar__current-location">
@@ -51,7 +56,7 @@ export const Sidebar = ({
           <MdLocationPin />
           {location}
         </span>
-        <Search />
+        <Search isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
     </section>
   );
