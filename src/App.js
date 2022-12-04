@@ -32,6 +32,8 @@ function App() {
     { enabled: Boolean(location.length) || geolocation.lat !== 0 }
   );
 
+  console.log(data);
+
   useEffectOnce(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -42,6 +44,7 @@ function App() {
   });
 
   const changeLocation = (newLocation) => {
+    console.log(newLocation);
     setGeolocation({ lat: 0, lon: 0 });
     setLocation(newLocation);
   };
@@ -60,7 +63,7 @@ function App() {
     <main className="weather-app">
       <Sidebar
         temperature={data.main.temp}
-        location={data.name}
+        location={`${data.name}, ${data.sys.country}`}
         icon={data.weather[0].icon}
         condition={data.weather[0].main}
         scaleType={scaleType}

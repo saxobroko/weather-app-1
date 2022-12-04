@@ -95,6 +95,8 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  overflow: scroll;
+  height: 80%;
 }
 
 .weather-app__sidebar__search-bar__results-item {

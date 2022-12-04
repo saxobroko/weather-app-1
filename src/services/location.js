@@ -1,10 +1,16 @@
 import { locationApi } from 'helpers';
-const apiKey = process.env.REACT_APP_LOCATION_API_KEY;
 
 const searchQueryLocation = async (query) => {
-  const response = await locationApi.get(
-    `autocomplete?apikey=${apiKey}&q=${query}`
-  );
+  const response = await locationApi.get('v1/city', {
+    params: {
+      name: query,
+      fields: 'timezone,state_code',
+      lang: 'en',
+      sort: 'timezone',
+      order: 'desc',
+      limit: 20
+    }
+  });
   return response.data;
 };
 

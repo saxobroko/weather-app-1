@@ -9,16 +9,22 @@ const getByCurrentLocation = async (lat, lon, units) => {
 };
 
 const getByCityName = async (name, units) => {
-  const response = await weatherApi.get(
-    `weather?appid=${apiKey}&q=${name}&units=${units}`
-  );
+  const response = await weatherApi.get(`weather`, {
+    params: { appid: apiKey, q: name, units: units }
+  });
   return response.data;
 };
 
 const getFiveDaysWeather = async (lat, lon, units) => {
-  const sevenDaysForecast = await weatherApi.get(
-    `onecall?lat=${lat}&lon=${lon}&exclude=current,hourly,minutely,alerts&units=${units}&appid=${apiKey}`
-  );
+  const sevenDaysForecast = await weatherApi.get(`onecall`, {
+    params: {
+      exclude: 'current,hourly,minutely,alerts',
+      units: units,
+      appid: apiKey,
+      lat: lat,
+      lon: lon
+    }
+  });
   const fiveDaysForecast = sevenDaysForecast.data.daily.slice(1, 6);
   return fiveDaysForecast;
 };

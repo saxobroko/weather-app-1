@@ -24,8 +24,8 @@ export const Search = ({ isOpen, setIsOpen, changeLocation }) => {
     setQuery(e.target.value);
   };
 
-  const handleOnClick = (e) => {
-    changeLocation(e.target.innerText);
+  const cleanTimezone = (str) => {
+    return str.split('/').pop().replace(/_/g, ' ');
   };
 
   return (
@@ -61,14 +61,19 @@ export const Search = ({ isOpen, setIsOpen, changeLocation }) => {
         </button>
       </form>
       <ul className="weather-app__sidebar__search-bar__results">
-        {locations?.map(({ AdministrativeArea: { LocalizedName } }) => (
-          <li
-            className="weather-app__sidebar__search-bar__results-item"
-            onClick={handleOnClick}
-          >
-            {LocalizedName}
-          </li>
-        ))}
+        {locations?.map(({ value, timezone, state_code }) => {
+          const handleOnClick = (e) => {
+            changeLocation(`${value},${state_code}`);
+          };
+          return (
+            <li
+              className="weather-app__sidebar__search-bar__results-item"
+              onClick={handleOnClick}
+            >
+              {value}, {cleanTimezone(timezone)}
+            </li>
+          );
+        })}
       </ul>
     </section>
   );
