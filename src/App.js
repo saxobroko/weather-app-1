@@ -1,4 +1,5 @@
 import React from 'react';
+import PacmanLoader from 'react-spinners/PacmanLoader';
 
 import { weatherService } from 'services';
 import { useEffectOnce } from 'hooks';
@@ -38,6 +39,8 @@ function App() {
         const { longitude, latitude } = position.coords;
         setGeolocation({ lat: latitude, lon: longitude });
       });
+    } else {
+      alert('geolocation not available?! What year is this?');
     }
   });
 
@@ -55,8 +58,15 @@ function App() {
     });
   };
 
-  if (error) return <div>error</div>;
-  if (isLoading) return <div>loading</div>;
+  if (isLoading)
+    return (
+      <div className="loading-message">
+        Allow browser to detect your location to use this website
+        <div style={{ marginTop: '2rem' }}>
+          <PacmanLoader color="#E7E7EB" />
+        </div>
+      </div>
+    );
   return (
     <main className="weather-app">
       <Sidebar

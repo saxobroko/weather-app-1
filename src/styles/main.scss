@@ -4,6 +4,13 @@
 @import 'normalize';
 @import 'functions', 'mixins';
 
+.loading-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 .weather-app {
   display: flex;
   height: 100vh;
