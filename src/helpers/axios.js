@@ -5,5 +5,7 @@ export const weatherApi = axios.create({
 });
 
 export const locationApi = axios.create({
-  baseURL: 'http://dataservice.accuweather.com/locations/v1/cities/'
+  baseURL:
+    'https://cors-anywhere.herokuapp.com/http://dataservice.accuweather.com/locations/v1/cities/',
+  headers: { 'Access-Control-Allow-Origin': 'http://localhost:3000/' }
 });

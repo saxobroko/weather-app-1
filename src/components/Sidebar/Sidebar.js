@@ -12,7 +12,9 @@ export const Sidebar = ({
   location,
   icon,
   condition,
-  scaleType
+  scaleType,
+  changeLocation,
+  getCurrentLocation
 }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -30,7 +32,10 @@ export const Sidebar = ({
           >
             Search for places
           </div>
-          <div className="weather-app__sidebar__current-location">
+          <div
+            className="weather-app__sidebar__current-location"
+            onClick={getCurrentLocation}
+          >
             <BiCurrentLocation />
           </div>
         </div>
@@ -56,7 +61,11 @@ export const Sidebar = ({
           <MdLocationPin />
           {location}
         </span>
-        <Search isOpen={isOpen} setIsOpen={setIsOpen} />
+        <Search
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          changeLocation={changeLocation}
+        />
       </div>
     </section>
   );

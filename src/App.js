@@ -14,25 +14,47 @@ import { useQuery } from '@tanstack/react-query';
 function App() {
   const [geolocation, setGeolocation] = React.useState({ lat: 0, lon: 0 });
   const [scaleType, setScaleType] = React.useState('metric');
+  const [location, setLocation] = React.useState('');
 
   const { isLoading, error, data } = useQuery(
-    ['currentForecast', scaleType],
-    () =>
-      weatherService.getByCurrentLocation(
-        geolocation.lat,
-        geolocation.lon,
-        scaleType
-      ),
-    { enabled: geolocation.lat !== 0 }
+    ['currentForecast', scaleType, location],
+    () => {
+      if (location) {
+        return weatherService.getByCityName(location, scaleType);
+      } else {
+        return weatherService.getByCurrentLocation(
+          geolocation.lat,
+          geolocation.lon,
+          scaleType
+        );
+      }
+    },
+    { enabled: Boolean(location.length) || geolocation.lat !== 0 }
   );
 
   useEffectOnce(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { longitude, latitude } = position.coords;
+        setGeolocation({ lat: latitude, lon: longitude });
+      });
+    }
+  });
+
+  const changeLocation = (newLocation) => {
+    setGeolocation({ lat: 0, lon: 0 });
+    setLocation(newLocation);
+  };
+
+  const getCurrentLocation = () => {
+    setLocation('');
     navigator.geolocation.getCurrentPosition((position) => {
       const { longitude, latitude } = position.coords;
       setGeolocation({ lat: latitude, lon: longitude });
     });
-  });
+  };
 
+  if (error) return <div>error</div>;
   if (isLoading) return <div>loading</div>;
   return (
     <main className="weather-app">
@@ -42,6 +64,8 @@ function App() {
         icon={data.weather[0].icon}
         condition={data.weather[0].main}
         scaleType={scaleType}
+        changeLocation={changeLocation}
+        getCurrentLocation={getCurrentLocation}
       />
       <section className="weather-app__information">
         <ScaleSelector scaleType={scaleType} setScaleType={setScaleType} />

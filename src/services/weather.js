@@ -8,6 +8,13 @@ const getByCurrentLocation = async (lat, lon, units) => {
   return response.data;
 };
 
+const getByCityName = async (name, units) => {
+  const response = await weatherApi.get(
+    `weather?appid=${apiKey}&q=${name}&units=${units}`
+  );
+  return response.data;
+};
+
 const getFiveDaysWeather = async (lat, lon, units) => {
   const sevenDaysForecast = await weatherApi.get(
     `onecall?lat=${lat}&lon=${lon}&exclude=current,hourly,minutely,alerts&units=${units}&appid=${apiKey}`
@@ -16,6 +23,10 @@ const getFiveDaysWeather = async (lat, lon, units) => {
   return fiveDaysForecast;
 };
 
-const weatherService = { getByCurrentLocation, getFiveDaysWeather };
+const weatherService = {
+  getByCurrentLocation,
+  getFiveDaysWeather,
+  getByCityName
+};
 
 export default weatherService;

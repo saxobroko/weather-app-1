@@ -3,28 +3,29 @@ import './Search.scss';
 import { GoSearch } from 'react-icons/go';
 import { useQuery } from '@tanstack/react-query';
 import { locationService } from 'services';
-import Skeleton from 'react-loading-skeleton';
 
-export const Search = ({ isOpen, setIsOpen }) => {
+export const Search = ({ isOpen, setIsOpen, changeLocation }) => {
   const [query, setQuery] = React.useState('');
+  const [inputValue, setInputValue] = React.useState('');
+  const { data: locations } = useQuery(
+    ['locationQuery', query],
+    () => locationService.searchQueryLocation(query),
+    { enabled: query.length > 0 }
+  );
 
-  console.log(query);
-
-  const {
-    isLoading,
-    error,
-    data: locations
-  } = useQuery(['locationQuery', query], () => {
-    if (query) return locationService.searchQueryLocation(query);
-  });
-
-  console.log(locations);
   const handleSubmit = (e) => {
     e.preventDefault();
+    setQuery(inputValue);
+    changeLocation(inputValue);
   };
 
   const handleOnChange = (e) => {
+    setInputValue(e.target.value);
     setQuery(e.target.value);
+  };
+
+  const handleOnClick = (e) => {
+    changeLocation(e.target.innerText);
   };
 
   return (
@@ -52,7 +53,7 @@ export const Search = ({ isOpen, setIsOpen }) => {
             id="location"
             placeholder="search location"
             onChange={handleOnChange}
-            value={query}
+            value={inputValue}
           />
         </div>
         <button type="submit" className="weather-app__sidebar__search-bar__btn">
@@ -61,8 +62,11 @@ export const Search = ({ isOpen, setIsOpen }) => {
       </form>
       <ul className="weather-app__sidebar__search-bar__results">
         {locations?.map(({ AdministrativeArea: { LocalizedName } }) => (
-          <li className="weather-app__sidebar__search-bar__results-item">
-            {LocalizedName || <Skeleton count={1} />}
+          <li
+            className="weather-app__sidebar__search-bar__results-item"
+            onClick={handleOnClick}
+          >
+            {LocalizedName}
           </li>
         ))}
       </ul>
